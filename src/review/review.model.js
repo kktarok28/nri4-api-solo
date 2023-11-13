@@ -64,11 +64,12 @@ module.exports = {
     return knex(REVIEW_TABLE).insert([query]).returning("*");
   },
 
+  /**
+   * DELETE a new review.
+   * @param {Object} product - The new product to add.
+   * @return {Promise<number>} A promise that resolves to the id of the created product.
+   */
   delete(review) {
-    const query = {
-      emp_id: review.emp_id,
-      restaurant_id: review.restaurant_id,
-    };
     return knex(REVIEW_TABLE)
       .del()
       .where({
@@ -79,7 +80,7 @@ module.exports = {
   },
 
   /**
-   * getAveragePerRestaurant
+   * getByRestaurantIdAndEnmId
    * @param {number} limit - The max number of records to return.
    * @return {Promise<Array>} A promise that resolves to an array products.
    */
@@ -99,6 +100,11 @@ module.exports = {
       .limit(100);
   },
 
+  /**
+   * PATCH a  review.
+   * @param {Object} product - The new product to add.
+   * @return {Promise<number>} A promise that resolves to the id of the created product.
+   */
   patch(review, param) {
     return knex(REVIEW_TABLE)
       .update(review)
