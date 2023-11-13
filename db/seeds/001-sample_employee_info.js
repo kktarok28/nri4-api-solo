@@ -20,5 +20,11 @@ exports.seed = async function (knex) {
       retire_flg: false,
       registrate_date: new Date(),
     },
+    {
+      id: "f9999",
+      name: "NOMURA",
+      retire_flg: false,
+      registrate_date: new Date(),
+    },
   ]);
 };

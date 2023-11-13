@@ -30,22 +30,42 @@ const setupServer = () => {
         text: req.body.text,
         registrate_date: new Date(),
       };
-      console.log(reqDto);
       const result = await reviewModel.create(reqDto);
+      res.json({ review: result[0] });
+    }
+  );
+
+  app.patch(
+    "/api/restaurants/:restaurantId/reviews/users/:userId",
+    async (req, res) => {
+      const beforeList = await reviewModel.getByRestaurantIdAndEnmId(
+        parseInt(parseInt(req.params.restaurantId)),
+        req.params.userId
+      );
+      const param = {
+        restaurant_id: parseInt(parseInt(req.params.restaurantId)),
+        emp_id: req.params.userId,
+      };
+
+      const result = await reviewModel.patch(
+        { ...beforeList[0], ...req.body },
+        param
+      );
       res.json({ review: result[0] });
     }
   );
 
   app.delete(
     "/api/restaurants/:restaurantId/reviews/users/:userId",
-    (req, res) => {}
+    async (req, res) => {
+      const reqDto = {
+        restaurant_id: parseInt(parseInt(req.params.restaurantId)),
+        emp_id: req.params.userId,
+      };
+      await reviewModel.delete(reqDto);
+      res.status(200).json({});
+    }
   );
-
-  app.patch(
-    "/api/restaurants/:restaurantId/reviews/users/:userId",
-    (req, res) => {}
-  );
-
   return app;
 };
 
