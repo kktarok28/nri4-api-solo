@@ -9,9 +9,9 @@ exports.up = function (knex) {
       .integer("restaurant_id")
       .notNullable()
       .references("restaurant_info.id");
-    table.string("taste_level", 255).notNullable();
-    table.string("speed_level", 32).notNullable();
-    table.string("crowd_level", 3).notNullable();
+    table.integer("taste_level").notNullable();
+    table.integer("speed_level").notNullable();
+    table.integer("crowd_level").notNullable();
     table.integer("recom_people");
     table.string("text", 255);
     table.date("registrate_date").notNullable();

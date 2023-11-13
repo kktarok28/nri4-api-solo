@@ -1,6 +1,6 @@
 # nri4-api-solo
 
-## アプリケーション名
+## アプリケーション名   
 会社周辺のランチマップ
 
 ※ソースは[こちら](https://github.com/kktarok28/nri4-api-solo)
@@ -29,7 +29,21 @@ MM/大手町/木場ごとに、飲食店を社員自身が評価し、NRI社員�
 ## TODO
 ・GoogleMapとの連携
 
-## ER
+## ER図
 ### データイメージ
 
 ![ER図](design/ER.svg)
+
+
+## APIエンドポイント
+
+### 飲食店情報
+- 飲食店情報取得：GET http://api/resutaurants/{:restaurant}
+- 飲食店情報登録：POST http://api/resutaurants/{:restaurant}
+- 飲食店情報更新：PATCH http://api/resutaurants/{:restaurant}
+
+### 飲食店評価
+- 評価取得：http://api/resutaurants/{:restaurant}/reviews
+- 評価登録：POST http://api/resutaurants/{:restaurant}/reviews/users/{:user}
+- 評価変更：PATCH  http://api/resutaurants/{:restaurant}/reviews/users/{:user}
+- 評価削除：DELETE http://api/resutaurants/{:restaurant}/reviews/users/{:user}
