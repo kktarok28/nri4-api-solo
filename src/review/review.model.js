@@ -63,11 +63,46 @@ module.exports = {
     };
     return knex(REVIEW_TABLE).insert([query]).returning("*");
   },
+
   delete(review) {
     const query = {
       emp_id: review.emp_id,
       restaurant_id: review.restaurant_id,
     };
-    return knex(REVIEW_TABLE).insert([query]).returning("*");
+    return knex(REVIEW_TABLE)
+      .del()
+      .where({
+        restaurant_id: review.restaurant_id,
+        emp_id: review.emp_id,
+      })
+      .returning("*");
+  },
+
+  /**
+   * getAveragePerRestaurant
+   * @param {number} limit - The max number of records to return.
+   * @return {Promise<Array>} A promise that resolves to an array products.
+   */
+  getByRestaurantIdAndEnmId(qRestaurantId, qEmpId) {
+    return knex
+      .select({
+        taste_level: "taste_level",
+        speed_level: "speed_level",
+        crowd_level: "crowd_level",
+        recom_people: "recom_people",
+        text: "text",
+        registrate_date: "registrate_date",
+        change_date: "change_date",
+      })
+      .from(REVIEW_TABLE)
+      .where({ restaurant_id: qRestaurantId, emp_id: qEmpId })
+      .limit(100);
+  },
+
+  patch(review, param) {
+    return knex(REVIEW_TABLE)
+      .update(review)
+      .where({ restaurant_id: param.restaurant_id, emp_id: param.emp_id })
+      .returning("*");
   },
 };
