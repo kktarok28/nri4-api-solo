@@ -25,8 +25,7 @@ module.exports = {
       })
       .from(REVIEW_TABLE)
       .where({ restaurant_id: qRestaurantId })
-      .limit(100)
-      .first(1);
+      .limit(100);
   },
 
   /**
@@ -44,5 +43,31 @@ module.exports = {
       })
       .from(REVIEW_TABLE)
       .groupBy("restaurant_id");
+  },
+
+  /**
+   * Create a new product.
+   * @param {Object} product - The new product to add.
+   * @return {Promise<number>} A promise that resolves to the id of the created product.
+   */
+  create(review) {
+    const query = {
+      emp_id: review.emp_id,
+      restaurant_id: review.restaurant_id,
+      taste_level: review.taste_level,
+      speed_level: review.speed_level,
+      crowd_level: review.crowd_level,
+      recom_people: review.recom_people,
+      text: review.text,
+      registrate_date: review.registrate_date,
+    };
+    return knex(REVIEW_TABLE).insert([query]).returning("*");
+  },
+  delete(review) {
+    const query = {
+      emp_id: review.emp_id,
+      restaurant_id: review.restaurant_id,
+    };
+    return knex(REVIEW_TABLE).insert([query]).returning("*");
   },
 };
