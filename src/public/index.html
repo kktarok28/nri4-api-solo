@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<meta charset=“UFT-8”>
+<html lang=“ja”></html>
+  <head>
+    <title>Restaurant_Review</title>
+    <script src="front.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>飲食店リスト</h1>
+    <div>
+      <input type="text" name="" id="input" />
+      <button type="submit" onClick="createTodo()">Submit</button>
+
+      <table id="myTable" class="table">
+        <thead class="table">
+          <tr class="table_border">
+            <td colspan="1">飲食店情報</td>
+            <td colspan="4">全体評価</td>
+            <td colspan="3">あなたの評価</td>
+            <td colspan="1">-</td>
+          </tr>
+          <tr class="table">
+            <td>店名</td>
+            <td>味</td>
+            <td>スピード</td>
+            <td>混雑度</td>
+            <td>口コミ数</td>
+            <td>味</td>
+            <td>スピード</td>
+            <td>混雑度</td>
+            <td>-</td>
+          </tr>
+          </tr>
+        </thead>
+        <tbody class="table">
+          <!-- Table rows will be added dynamically using JavaScript -->
+        </tbody>
+        </table>
+    </div>
+
+    <dialog>
+      <!-- モーダルウィンドウ内のテキストの指定 -->
+      <input type="text" id="taste_text" placeholder="味：">
+      <input type="text" id="speed_text" placeholder="スピード：">
+      <input type="text" id="crowd_text" placeholder="混雑度：">
+      <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
+      <button id="post">追加</button>
+      <button id="patch">更新</button>
+      <button id="delete">削除</button>
+      <button id="close">閉じる</button>
+    </dialog>
+
+
+      
+    </div>
+  </body>
+</html>

@@ -1,16 +1,18 @@
 const knex = require("../kenex");
 
 const REVIEW_TABLE = "review";
+const RESTAURANT_TABLE = "restaurant_info";
 
 module.exports = {
   REVIEW_TABLE,
+  RESTAURANT_TABLE,
 
   /**
    * getAveragePerRestaurant
    * @param {number} limit - The max number of records to return.
    * @return {Promise<Array>} A promise that resolves to an array products.
    */
-  getByRestaurantId(qRestaurantId) {
+  getByRestaurantId(review) {
     return knex
       .select({
         emp_id: "emp_id",
@@ -24,7 +26,10 @@ module.exports = {
         change_date: "change_date",
       })
       .from(REVIEW_TABLE)
-      .where({ restaurant_id: qRestaurantId })
+      .where({
+        restaurant_id: review.restaurant_id,
+        emp_id: review.emp_id,
+      })
       .limit(100);
   },
 
@@ -36,13 +41,20 @@ module.exports = {
   getAveragePerRestaurant() {
     return knex
       .select({
-        restaurant_id: "restaurant_id",
-        taste_level: knex.raw("ROUND(AVG(taste_level),2)"),
-        speed_level: knex.raw("ROUND(AVG(speed_level),2)"),
-        crowd_level: knex.raw("ROUND(AVG(crowd_level),2)"),
+        restaurant_id: "reviews.restaurant_id",
+        restaurant_name: "restaurant_info.name",
+        taste_level: knex.raw("ROUND(AVG(reviews.taste_level), 2)"),
+        speed_level: knex.raw("ROUND(AVG(reviews.speed_level), 2)"),
+        crowd_level: knex.raw("ROUND(AVG(reviews.crowd_level), 2)"),
+        sum: knex.raw("sum(reviews.restaurant_id)"),
       })
-      .from(REVIEW_TABLE)
-      .groupBy("restaurant_id");
+      .from({ reviews: REVIEW_TABLE })
+      .groupBy("reviews.restaurant_id", "restaurant_info.name")
+      .join(
+        { restaurant_info: RESTAURANT_TABLE },
+        "reviews.restaurant_id",
+        "restaurant_info.id"
+      );
   },
 
   /**
@@ -70,6 +82,7 @@ module.exports = {
    * @return {Promise<number>} A promise that resolves to the id of the created product.
    */
   delete(review) {
+    console.log(review);
     return knex(REVIEW_TABLE)
       .del()
       .where({
