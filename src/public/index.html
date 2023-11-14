@@ -7,33 +7,38 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>飲食店リスト</h1>
-    <div>
-      <input type="text" name="" id="input" />
-      <button type="submit" onClick="createTodo()">Submit</button>
+    <h1>飲食店 社内レビューアプリ (ランチ版)</h1>
+    <h3>ユーザID:03343</h3>
 
-      <table id="myTable" class="table">
+    評価観点は、<b>美味しさ</b>、<b>混雑度</b>、<b>立地</b>の3観点<br>
+  <li> <b>美味しさ</b>　：「3：美味しい」「2：まあまあ」「1：微妙」 </li>
+  <li> <b>混雑度</b>　　：「3：すぐ入れる」「2：たまに並ぶ」「1：必ず並ぶ」</li>
+  <li> <b>立地</b>：「3：徒歩5分未満」「2：徒歩5分以上-10分未満」、「1：徒歩10分以上」、 </li>
+  <br>
+  <br>
+    <div>
+      <table id="myTable"class="table">
         <thead class="table">
           <tr class="table_border">
             <td colspan="1">飲食店情報</td>
-            <td colspan="4">全体評価</td>
+            <td colspan="4">みんなの評価</td>
             <td colspan="3">あなたの評価</td>
             <td colspan="1">-</td>
           </tr>
           <tr class="table">
             <td>店名</td>
             <td>味</td>
-            <td>スピード</td>
             <td>混雑度</td>
+            <td>立地</td>
             <td>口コミ数</td>
             <td>味</td>
-            <td>スピード</td>
             <td>混雑度</td>
+            <td>立地</td>
             <td>-</td>
           </tr>
           </tr>
         </thead>
-        <tbody class="table">
+        <tbody id="tbody" class="table" >
           <!-- Table rows will be added dynamically using JavaScript -->
         </tbody>
         </table>
@@ -42,16 +47,14 @@
     <dialog>
       <!-- モーダルウィンドウ内のテキストの指定 -->
       <input type="text" id="taste_text" placeholder="味：">
-      <input type="text" id="speed_text" placeholder="スピード：">
-      <input type="text" id="crowd_text" placeholder="混雑度：">
+      <input type="text" id="speed_text" placeholder="混雑度：">
+      <input type="text" id="crowd_text" placeholder="立地：">
       <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
       <button id="post">追加</button>
       <button id="patch">更新</button>
       <button id="delete">削除</button>
       <button id="close">閉じる</button>
     </dialog>
-
-
       
     </div>
   </body>
