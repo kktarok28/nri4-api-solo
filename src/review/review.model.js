@@ -46,7 +46,7 @@ module.exports = {
         taste_level: knex.raw("ROUND(AVG(reviews.taste_level), 2)"),
         speed_level: knex.raw("ROUND(AVG(reviews.speed_level), 2)"),
         crowd_level: knex.raw("ROUND(AVG(reviews.crowd_level), 2)"),
-        sum: knex.raw("sum(reviews.restaurant_id)"),
+        sum: knex.raw("count(reviews.restaurant_id)"),
       })
       .from({ reviews: REVIEW_TABLE })
       .groupBy("reviews.restaurant_id", "restaurant_info.name")

@@ -9,6 +9,18 @@ exports.seed = async function (knex) {
   await knex("employee_info").del();
   await knex("employee_info").insert([
     {
+      id: "03342",
+      name: "NOMURA",
+      retire_flg: false,
+      registrate_date: new Date(),
+    },
+    {
+      id: "03341",
+      name: "NOMURA",
+      retire_flg: false,
+      registrate_date: new Date(),
+    },
+    {
       id: "03343",
       name: "NOMURA",
       retire_flg: false,
